@@ -1,4 +1,4 @@
-package com.shubhendu.javaworld.datastructures;
+package com.shubhendu.javaworld.datastructures.queue;
 
 public class Queue<Item> {
 

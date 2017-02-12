@@ -1,4 +1,4 @@
-package com.shubhendu.javaworld.datastructures;
+package com.shubhendu.javaworld.datastructures.linkedList;
 
 public class LinkedList<Item> {
 	Node<Item> head;
