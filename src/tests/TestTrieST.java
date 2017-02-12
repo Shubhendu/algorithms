@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.shubhendu.javaworld.datastructures.TrieST;
+import com.shubhendu.javaworld.datastructures.tries.TrieST;
 
 /**
  * @author ssingh
