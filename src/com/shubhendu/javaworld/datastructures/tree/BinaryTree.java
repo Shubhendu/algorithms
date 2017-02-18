@@ -1,9 +1,5 @@
 package com.shubhendu.javaworld.datastructures.tree;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.Stack;
-
 class Node<T extends Comparable<T>> {
 	T value;
 	Node<T> left;
@@ -102,24 +98,92 @@ public class BinaryTree {
 		}
 
 	}
+	
+	public Node<Integer> getLowestCommonAncestor(Node<Integer> a, Node<Integer> b) {
+		return getLowestCommonAncestor(root, a, b);
+	}
+
+	private Node<Integer> getLowestCommonAncestor(Node<Integer> currentNode, Node<Integer> a, Node<Integer> b) {
+		if (currentNode == null) {
+			return null;
+		}
+
+		if (currentNode.value == a.value) {
+			return currentNode;
+		}
+
+		if (currentNode.value == b.value) {
+			return currentNode;
+		}
+
+		Node<Integer> leftMatch = getLowestCommonAncestor(currentNode.left, a, b);
+		if (leftMatch != null && leftMatch.value != a.value && leftMatch.value != b.value)
+			return leftMatch;
+
+		Node<Integer> rightMatch = getLowestCommonAncestor(currentNode.right, a, b);
+
+		if (leftMatch == null && rightMatch == null) {
+			return null;
+		} else if (leftMatch != null && rightMatch != null) {
+			return currentNode;
+		} else if (leftMatch != null) {
+			return leftMatch;
+		} else {
+			return rightMatch;
+		}
+	}
 
 	public static void main(String[] args) {
+		/*
+					
+					12
+				/		 \
+			8			  	9
+		  /   \			 /  	\
+		2		7		10		  11
+			  /	 \		  \		/	\
+			4	  3			17 13 	15
+			
+		*/
         BinaryTree tree = new BinaryTree();
-        tree.root = new Node<Integer>(1);
-        tree.root.left = new Node(2);
-        tree.root.right = new Node(3);
-        tree.root.left.left = new Node(4);
-        tree.root.left.right = new Node(5);
-        tree.root.left.right.right = new Node(6);
-        tree.root.left.right.right.left = new Node(3);
-        tree.root.left.right.right.right = new Node(7);
-        tree.root.left.right.right.right.left = new Node(8);
-          
-        /* get leaf count of the abve tree */
-        System.out.println("The leaf count of binary tree is : "
-                             + tree.getLeafCount());
-        System.out.println("The height of binary tree is : "
-                + tree.getMaxHeight());
+        tree.root = new Node<Integer>(12);
+        tree.root.left = new Node<Integer>(8);
+        tree.root.left.left = new Node<Integer>(2);
+        tree.root.left.right = new Node<Integer>(7);
+        tree.root.left.right.left = new Node<Integer>(4);
+        tree.root.left.right.right = new Node<Integer>(3);
+        
+        tree.root.right = new Node<Integer>(9);
+        tree.root.right.left = new Node<Integer>(10);
+        tree.root.right.left.right = new Node<Integer>(17);
+        
+        tree.root.right.right = new Node<Integer>(11);
+        tree.root.right.right.left = new Node<Integer>(13);
+        tree.root.right.right.right = new Node<Integer>(15);
+        
+        Node<Integer> lca =  tree.getLowestCommonAncestor(new Node<Integer>(4), new Node<Integer>(12));
+        if (lca != null) {
+        	System.out.println("LCA :-->"+lca.value);
+        } else {
+        	System.out.println("No LCA");
+        }
+        
+        
+//        tree.root = new Node<Integer>(1);
+//        tree.root.left = new Node(2);
+//        tree.root.right = new Node(3);
+//        tree.root.left.left = new Node(4);
+//        tree.root.left.right = new Node(5);
+//        tree.root.left.right.right = new Node(6);
+//        tree.root.left.right.right.left = new Node(3);
+//        tree.root.left.right.right.right = new Node(7);
+//        tree.root.left.right.right.right.left = new Node(8);
+//          
+//        /* get leaf count of the abve tree */
+//        System.out.println("The leaf count of binary tree is : "
+//                             + tree.getLeafCount());
+//        System.out.println("The height of binary tree is : "
+//                + tree.getMaxHeight());
 	}
 //		BinaryTree tree = new BinaryTree(45);
 //		Node<Integer> root = tree.getRoot();
