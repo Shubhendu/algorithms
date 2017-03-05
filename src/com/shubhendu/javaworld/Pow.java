@@ -12,6 +12,7 @@ public class Pow {
 		}
 
 		if (n < 0) {
+			n = -n;
 			x = 1 / x;
 		}
 
@@ -21,21 +22,21 @@ public class Pow {
 
 	public static void main(String[] args) {
 		Pow p = new Pow();
-		p.myPow(2, -1);
-		p.myPow(2, 0);
-		p.myPow(2, 1);
-		p.myPow(2, 5);
-		p.myPow(2, 4);
-		p.myPow(2, -4);
-		p.myPow(2, -5);
+		System.out.println(p.myPow(2, -1));
+		System.out.println(p.myPow(2, 0));
+		System.out.println(p.myPow(2, 1));
+		System.out.println(p.myPow(2, 5));
+		System.out.println(p.myPow(2, 4));
+		System.out.println(p.myPow(2, -4));
+		System.out.println(p.myPow(2, -5));
 
-		p.myPow(-2, -1);
-		p.myPow(-2, 0);
-		p.myPow(-2, 1);
-		p.myPow(-2, 5);
-		p.myPow(-2, 4);
-		p.myPow(-2, -4);
-		p.myPow(-2, -5);
+		System.out.println(p.myPow(-2, -1));
+		System.out.println(p.myPow(-2, 0));
+		System.out.println(p.myPow(-2, 1));
+		System.out.println(p.myPow(-2, 5));
+		System.out.println(p.myPow(-2, 4));
+		System.out.println(p.myPow(-2, -4));
+		System.out.println(p.myPow(-2, -5));
 
 		System.out.println(p.myPow(2.00000, -2147483648));
 		System.out.println(Math.pow(2.00000, -2147483648));

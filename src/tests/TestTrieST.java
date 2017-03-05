@@ -31,4 +31,8 @@ public class TestTrieST {
 		
 	}
 	
+	public static void main(String[] args) {
+		
+	}
+	
 }

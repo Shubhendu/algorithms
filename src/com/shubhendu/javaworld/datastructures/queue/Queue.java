@@ -1,14 +1,16 @@
 package com.shubhendu.javaworld.datastructures.queue;
 
-public class Queue<Item> {
+import java.util.Iterator;
 
-	private Node<Item> firstNode;
-	private Node<Item> lastNode;
+public class Queue<Item> implements Iterable<Item>{
+
+	private Node firstNode;
+	private Node lastNode;
 	private int size;
 
-	private static class Node<Item> {
+	private class Node{
 		Item item;
-		Node<Item> next;
+		Node next;
 
 		public Node(Item item) {
 			this.item = item;
@@ -19,15 +21,26 @@ public class Queue<Item> {
 	public boolean isEmpty() {
 		return this.size == 0;
 	}
+	
+	public int size() {
+		return this.size;
+	}
+	
+	public Item peek() {
+		if (isEmpty()) 
+			return null;
+		
+		return this.firstNode.item;
+	}
 
 	public void enqueue(Item item) {
 		if (isEmpty()) {
-			this.firstNode = new Node<Item>(item);
+			this.firstNode = new Node(item);
 			this.lastNode = firstNode;
 			
 		} else {
-			Node<Item> oldLastNode = this.lastNode;
-			this.lastNode = new Node<Item>(item);
+			Node oldLastNode = this.lastNode;
+			this.lastNode = new Node(item);
 			oldLastNode.next = this.lastNode;
 		}
 		this.size++;
@@ -38,7 +51,7 @@ public class Queue<Item> {
 			return null;
 		}
 		
-		Node<Item> oldFirstNode = this.firstNode;
+		Node oldFirstNode = this.firstNode;
 		this.firstNode = oldFirstNode.next;
 		this.size--;
 		return oldFirstNode.item;
@@ -79,6 +92,31 @@ public class Queue<Item> {
 		System.out.println("Size: "+queue.size);
 		System.out.println("Item: "+queue.dequeue());
 		System.out.println("Size: "+queue.size);
+	}
+
+	@Override
+	public Iterator<Item> iterator() {
+		// TODO Auto-generated method stub
+		return new ListIterator();
+	}
+	
+	private class ListIterator implements Iterator<Item>{
+		Node current = firstNode;
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public Item next() {
+			if(hasNext()){
+				Item item = current.item;
+				current = current.next;
+				return item;
+			}
+				return null;
+		}
+		
 	}
 
 }

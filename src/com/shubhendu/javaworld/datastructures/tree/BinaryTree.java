@@ -1,29 +1,17 @@
 package com.shubhendu.javaworld.datastructures.tree;
 
-class Node<T extends Comparable<T>> {
-	T value;
-	Node<T> left;
-	Node<T> right;
-
-	public Node(T value) {
-		this.value = value;
-		this.left = null;
-		this.right = null;
-	}
-}
-
 public class BinaryTree {
-	private Node<Integer> root;
+	private TreeNode<Integer> root;
 
 	public BinaryTree() {
 		this.root = null;
 	}
 
-	public BinaryTree(Integer value) {
-		this.root = new Node<Integer>(value);
+	public BinaryTree(Integer val) {
+		this.root = new TreeNode<Integer>(val);
 	}
 
-	public Node<Integer> getRoot() {
+	public TreeNode<Integer> getRoot() {
 		return this.root;
 	}
 
@@ -31,7 +19,7 @@ public class BinaryTree {
 		return (_size(this.root));
 	}
 
-	private int _size(Node<Integer> node) {
+	private int _size(TreeNode<Integer> node) {
 		if (node == null)
 			return 0;
 
@@ -50,7 +38,7 @@ public class BinaryTree {
 		return getMaxHeight(this.root, 1);
 	}
 	
-	private int getMaxHeight(Node node, int height) {
+	private int getMaxHeight(TreeNode<Integer> node, int height) {
 		if (node == null) {
 			return height;
 		}
@@ -65,7 +53,7 @@ public class BinaryTree {
 		return countLeafNodes(root);
 	}
 	
-	private int countLeafNodes(Node<Integer> x) {
+	private int countLeafNodes(TreeNode<Integer> x) {
 		if (x == null) {
 			return 0;
 		} else if (x.left == null && x.right == null) {
@@ -82,12 +70,12 @@ public class BinaryTree {
 		return getLevelOfANode(root, x, 1);
 	}
 	
-	private int getLevelOfANode(Node<Integer> node, int data, int level) {
+	private int getLevelOfANode(TreeNode<Integer> node, int data, int level) {
 		if (node == null) {
 			return 0;
 		}
 
-		if (node.value == data) {
+		if (node.val == data) {
 			return level;
 		}
 		int l = getLevelOfANode(root.left, data, level + 1);
@@ -99,28 +87,28 @@ public class BinaryTree {
 
 	}
 	
-	public Node<Integer> getLowestCommonAncestor(Node<Integer> a, Node<Integer> b) {
+	public TreeNode<Integer> getLowestCommonAncestor(TreeNode<Integer> a, TreeNode<Integer> b) {
 		return getLowestCommonAncestor(root, a, b);
 	}
 
-	private Node<Integer> getLowestCommonAncestor(Node<Integer> currentNode, Node<Integer> a, Node<Integer> b) {
+	private TreeNode<Integer> getLowestCommonAncestor(TreeNode<Integer> currentNode, TreeNode<Integer> a, TreeNode<Integer> b) {
 		if (currentNode == null) {
 			return null;
 		}
 
-		if (currentNode.value == a.value) {
+		if (currentNode.val == a.val) {
 			return currentNode;
 		}
 
-		if (currentNode.value == b.value) {
+		if (currentNode.val == b.val) {
 			return currentNode;
 		}
 
-		Node<Integer> leftMatch = getLowestCommonAncestor(currentNode.left, a, b);
-		if (leftMatch != null && leftMatch.value != a.value && leftMatch.value != b.value)
+		TreeNode<Integer> leftMatch = getLowestCommonAncestor(currentNode.left, a, b);
+		if (leftMatch != null && leftMatch.val != a.val && leftMatch.val != b.val)
 			return leftMatch;
 
-		Node<Integer> rightMatch = getLowestCommonAncestor(currentNode.right, a, b);
+		TreeNode<Integer> rightMatch = getLowestCommonAncestor(currentNode.right, a, b);
 
 		if (leftMatch == null && rightMatch == null) {
 			return null;
@@ -146,30 +134,30 @@ public class BinaryTree {
 			
 		*/
         BinaryTree tree = new BinaryTree();
-        tree.root = new Node<Integer>(12);
-        tree.root.left = new Node<Integer>(8);
-        tree.root.left.left = new Node<Integer>(2);
-        tree.root.left.right = new Node<Integer>(7);
-        tree.root.left.right.left = new Node<Integer>(4);
-        tree.root.left.right.right = new Node<Integer>(3);
+        tree.root = new TreeNode<Integer>(12);
+        tree.root.left = new TreeNode<Integer>(8);
+        tree.root.left.left = new TreeNode<Integer>(2);
+        tree.root.left.right = new TreeNode<Integer>(7);
+        tree.root.left.right.left = new TreeNode<Integer>(4);
+        tree.root.left.right.right = new TreeNode<Integer>(3);
         
-        tree.root.right = new Node<Integer>(9);
-        tree.root.right.left = new Node<Integer>(10);
-        tree.root.right.left.right = new Node<Integer>(17);
+        tree.root.right = new TreeNode<Integer>(9);
+        tree.root.right.left = new TreeNode<Integer>(10);
+        tree.root.right.left.right = new TreeNode<Integer>(17);
         
-        tree.root.right.right = new Node<Integer>(11);
-        tree.root.right.right.left = new Node<Integer>(13);
-        tree.root.right.right.right = new Node<Integer>(15);
+        tree.root.right.right = new TreeNode<Integer>(11);
+        tree.root.right.right.left = new TreeNode<Integer>(13);
+        tree.root.right.right.right = new TreeNode<Integer>(15);
         
-        Node<Integer> lca =  tree.getLowestCommonAncestor(new Node<Integer>(4), new Node<Integer>(12));
+        TreeNode<Integer> lca =  tree.getLowestCommonAncestor(new TreeNode<Integer>(4), new TreeNode<Integer>(12));
         if (lca != null) {
-        	System.out.println("LCA :-->"+lca.value);
+        	System.out.println("LCA :-->"+lca.val);
         } else {
         	System.out.println("No LCA");
         }
         
         
-//        tree.root = new Node<Integer>(1);
+//        tree.root = new TreeNode<Integer>(1);
 //        tree.root.left = new Node(2);
 //        tree.root.right = new Node(3);
 //        tree.root.left.left = new Node(4);
@@ -186,17 +174,17 @@ public class BinaryTree {
 //                + tree.getMaxHeight());
 	}
 //		BinaryTree tree = new BinaryTree(45);
-//		Node<Integer> root = tree.getRoot();
-//		root.left = new Node<Integer>(25);
-//		root.right = new Node<Integer>(45);
+//		TreeNode<Integer> root = tree.getRoot();
+//		root.left = new TreeNode<Integer>(25);
+//		root.right = new TreeNode<Integer>(45);
 //
-//		root.left.left = new Node<Integer>(10);
-//		root.left.right = new Node<Integer>(15);
+//		root.left.left = new TreeNode<Integer>(10);
+//		root.left.right = new TreeNode<Integer>(15);
 //
-//		root.right.left = new Node<Integer>(35);
-//		root.right.right = new Node<Integer>(50);
-//		root.right.right.left = new Node<Integer>(49);
-//		root.right.right.right = new Node<Integer>(51);
+//		root.right.left = new TreeNode<Integer>(35);
+//		root.right.right = new TreeNode<Integer>(50);
+//		root.right.right.left = new TreeNode<Integer>(49);
+//		root.right.right.right = new TreeNode<Integer>(51);
 //
 //		System.out.println(tree.size());
 //
@@ -210,12 +198,12 @@ public class BinaryTree {
 //		System.out.println(" PreOrder Traversal");
 //
 //		// BFS on Binary Tree
-//		Queue<Node<Integer>> queue = new ArrayDeque<Node<Integer>>();
+//		Queue<TreeNode<Integer>> queue = new ArrayDeque<TreeNode<Integer>>();
 //		queue.add(root);
 //
 //		while (!queue.isEmpty()) {
-//			Node<Integer> elem = queue.poll();
-//			System.out.println(elem.value);
+//			TreeNode<Integer> elem = queue.poll();
+//			System.out.println(elem.val);
 //			if (elem.left != null) {
 //				queue.add(elem.left);
 //			}
@@ -225,13 +213,13 @@ public class BinaryTree {
 //		}
 //
 //		// In Order Traversal using stack
-//		Stack<Node<Integer>> s = new Stack<Node<Integer>>();
+//		Stack<TreeNode<Integer>> s = new Stack<TreeNode<Integer>>();
 //		s.add(root);
-//		Node<Integer> currentNode = root;
+//		TreeNode<Integer> currentNode = root;
 //		while (!s.isEmpty()) {
 //			if (currentNode == null) {
-//				Node<Integer> currElement = s.pop();
-//				System.out.println(currElement.value);
+//				TreeNode<Integer> currElement = s.pop();
+//				System.out.println(currElement.val);
 //				currentNode = currElement.right;
 //			} else {
 //				currentNode = currentNode.left;
@@ -242,28 +230,28 @@ public class BinaryTree {
 //
 //	}
 
-	private static void inOrderTraversal(Node<Integer> node) {
+	public static void inOrderTraversal(TreeNode<Integer> node) {
 		if (node == null)
 			return;
 		inOrderTraversal(node.left);
-		System.out.print(" " + node.value);
+		System.out.print(" " + node.val);
 		inOrderTraversal(node.right);
 	}
 
-	private static void preOrderTraversal(Node<Integer> node) {
+	public static void preOrderTraversal(TreeNode<Integer> node) {
 		if (node == null)
 			return;
-		System.out.print(" " + node.value);
+		System.out.print(" " + node.val);
 		preOrderTraversal(node.left);
 		preOrderTraversal(node.right);
 	}
 
-	private static void postOrderTraversal(Node<Integer> node) {
+	public static void postOrderTraversal(TreeNode<Integer> node) {
 		if (node == null)
 			return;
 		postOrderTraversal(node.left);
 		postOrderTraversal(node.right);
-		System.out.print(" " + node.value);
+		System.out.print(" " + node.val);
 	}
 
 }

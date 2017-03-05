@@ -62,6 +62,14 @@ public class LinkedList<Item> {
 		currentNode.next = newNode;
 
 	}
+	
+	public void printLinkedListReversed(Node node) {
+		if (node == null)
+			return;
+
+		printLinkedListReversed(node.next);
+		System.out.println(node.value);
+	}
 
 	public void delete(Item item) {
 		if (this.head == null) {
@@ -168,6 +176,8 @@ public class LinkedList<Item> {
 		linkedList.append("U");
 		System.out.println("\nPrint insertAfter ");
 		linkedList.printList();
+		System.out.println("\n=======Reverse=====");
+		linkedList.printLinkedListReversed(linkedList.head);
 
 		LinkedList reversedLinkedList = new LinkedList(linkedList.reverse(linkedList.head));
 		System.out.println("\nPrint reversed ");

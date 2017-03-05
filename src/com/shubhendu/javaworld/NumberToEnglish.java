@@ -150,6 +150,6 @@ public class NumberToEnglish {
 		converter.convertNumber(99);
 		converter.convertNumber(999);
 		converter.convertNumber(1001);
-		converter.convertNumber(1199921211L);
+		converter.convertNumber(2147483648L);
 	}
 }
