@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shubhendu.javaworld;
+package com.shubhendu.javaworld.recursion;
 
 import java.util.ArrayList;
 import java.util.List;
