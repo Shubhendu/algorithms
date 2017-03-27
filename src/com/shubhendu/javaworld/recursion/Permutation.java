@@ -50,15 +50,19 @@ public class Permutation {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int[] nums = new int[] {1,2,3};
-		Permutation p = new Permutation();
-		List<List<Integer>> permutations = p.permute(nums);
-		for (List<Integer> numList : permutations) {
-			System.out.println("\n===");
-			for (Integer n : numList) {
-				System.out.print(n+ " ");
-			}
-		}
+		
+		String x = ".abc.";
+		System.out.println(x.substring(0,1));
+		
+//		int[] nums = new int[] {1,2,3};
+//		Permutation p = new Permutation();
+//		List<List<Integer>> permutations = p.permute(nums);
+//		for (List<Integer> numList : permutations) {
+//			System.out.println("\n===");
+//			for (Integer n : numList) {
+//				System.out.print(n+ " ");
+//			}
+//		}
 	}
 
 }

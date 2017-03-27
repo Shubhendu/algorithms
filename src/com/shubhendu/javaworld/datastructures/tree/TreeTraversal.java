@@ -53,7 +53,21 @@ public class TreeTraversal {
 				stack.push(node.left);
 		}
 	}
-
+	
+	private int getRightIndex(int[] arr, int rootIndex) {
+		int rightIndex = rootIndex + 1;
+		while(rightIndex < arr.length && arr[rightIndex] < arr[rootIndex]) {
+			rightIndex ++;
+		}
+		
+		return rightIndex;
+	}
+	
+	public void printLeafNodeInPreNode() {
+		int[] preOrder = new int[] {10, 5, 3, 6, 12, 18, 17};
+		int root = preOrder[0];
+		int rightTreeIndex = getRightIndex(preOrder, 0);
+	}
 	public void postOrder(TreeNode root) {
 		Stack<TreeNode> stack1 = new Stack<TreeNode>();
 		stack1.push(root);
