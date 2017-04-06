@@ -47,10 +47,14 @@ public class MatrixSnakeOrder {
 
 		result.add(this.matrix[r][c]);
 		this.visited[r][c] = true;
-
+		
+//		Go Right
 		printMatrixSnakeOrder(r, c + 1, result, startRow, endRow, startCol, endCol);
+//		Go Down
 		printMatrixSnakeOrder(r + 1, c, result, startRow, endRow, startCol, endCol);
+//		Go left
 		printMatrixSnakeOrder(r, c - 1, result, startRow, endRow, startCol, endCol);
+//		Go up
 		printMatrixSnakeOrder(r - 1, c, result, startRow, endRow, startCol, endCol);
 	}
 
