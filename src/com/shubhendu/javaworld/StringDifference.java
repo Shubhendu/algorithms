@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.shubhendu.javaworld;
 
@@ -20,23 +20,15 @@ public class StringDifference {
 		Map<Character, Integer> charCountMap = new HashMap<Character, Integer>();
 
 		for (char c : s.toCharArray()) {
-			if (charCountMap.containsKey(c)) {
-				charCountMap.put(c, charCountMap.get(c) + 1);
-			} else {
-				charCountMap.put(c, 1);
-			}
+			charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
 		}
 
 		for (char c : t.toCharArray()) {
-			if (!charCountMap.containsKey(c))
+			if (!charCountMap.containsKey(c) || charCountMap.get(c) - 1 < 0)
 				return c;
 			charCountMap.put(c, charCountMap.get(c) - 1);
 		}
 
-		for (Character c : charCountMap.keySet()) {
-			if (charCountMap.get(c) < 0)
-				return c;
-		}
 		return t.charAt(t.length() - 1);
 
 	}

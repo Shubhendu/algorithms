@@ -107,6 +107,10 @@ public class InrderSuccessor {
 		// root.right.right));
 		//// inrderSuccessor.printNode(inrderSuccessor.inorderSuccessor(root,
 		// root.left.right));
+		
+		System.out.println(16 >> 1);
+		String s = "abs";
+		System.out.println((char) (97 +25));
 	}
 
 }

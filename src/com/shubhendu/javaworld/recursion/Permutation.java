@@ -23,6 +23,7 @@ public class Permutation {
 		if (start >= num.length) {
 			ArrayList<Integer> item = convertArrayToList(num);
 			result.add(item);
+			return;
 		}
 
 		for (int j = start; j <= num.length - 1; j++) {
@@ -50,19 +51,23 @@ public class Permutation {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+//		
+//		String x = ".abc.";
+//		System.out.println(x.substring(0,1));
 		
-		String x = ".abc.";
-		System.out.println(x.substring(0,1));
-		
-//		int[] nums = new int[] {1,2,3};
-//		Permutation p = new Permutation();
-//		List<List<Integer>> permutations = p.permute(nums);
-//		for (List<Integer> numList : permutations) {
-//			System.out.println("\n===");
-//			for (Integer n : numList) {
-//				System.out.print(n+ " ");
-//			}
-//		}
+		int[] nums = new int[] {1,2,3,4};
+		Permutation p = new Permutation();
+		List<List<Integer>> permutations = p.permute(nums);
+		int count=0;
+		for (List<Integer> numList : permutations) {
+			System.out.println("\n===");
+			for (Integer n : numList) {
+				System.out.print(n+ " ");
+				
+			}
+			count++;
+		}
+		System.out.println(count);
 	}
 
 }

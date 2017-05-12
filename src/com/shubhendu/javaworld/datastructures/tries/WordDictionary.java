@@ -153,14 +153,14 @@ public class WordDictionary {
 		obj.addWord("ab");
 		obj.addWord("aaaaa");
 
-		// System.out.println(obj.search("a"));
-		// System.out.println(obj.search("a."));
-		// System.out.println(obj.search("ab"));
-		// System.out.println(obj.search(".a"));
-		// System.out.println(obj.search(".b"));
-		// System.out.println(obj.search("ab."));
-		// System.out.println(obj.search("."));
-		// System.out.println(obj.search(".."));
+		 System.out.println(obj.search("a"));
+		 System.out.println(obj.search("a."));
+		 System.out.println(obj.search("ab"));
+		 System.out.println(obj.search(".a"));
+		 System.out.println(obj.search(".b"));
+		 System.out.println(obj.search("ab."));
+		 System.out.println(obj.search("."));
+		 System.out.println(obj.search(".."));
 		System.out.println(obj.search("aaaaa"));
 		System.out.println(obj.search("aaaaab"));
 

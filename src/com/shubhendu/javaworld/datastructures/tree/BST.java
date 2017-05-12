@@ -3,8 +3,6 @@
  */
 package com.shubhendu.javaworld.datastructures.tree;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 import com.shubhendu.javaworld.datastructures.queue.Queue;
@@ -65,18 +63,18 @@ public class BST<T extends Comparable<T>> {
 		
 		return queue.peek();
 	}
-
+	
 	public static void main(String[] args) {
 		BST<Integer> tree = new BST<Integer>();
         
 	       /* Construct the following binary tree
-	                 1
+	                 10
 	               /   \
-	              2     3
+	              5     31
 	             /  \
-	            4    5
+	            4    8
 	           /
-	          7
+	          3
 	       */
        
 		tree.root = new BSTNode<Integer>(10);

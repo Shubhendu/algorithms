@@ -1,9 +1,9 @@
 package com.shubhendu.javaworld.datastructures.tree;
 
 public class TreeNode<T extends Comparable<T>> {
-	T val;
-	TreeNode<T> left;
-	TreeNode<T> right;
+	public T val;
+	public TreeNode<T> left;
+	public TreeNode<T> right;
 
 	public TreeNode(T val) {
 		this.val = val;
