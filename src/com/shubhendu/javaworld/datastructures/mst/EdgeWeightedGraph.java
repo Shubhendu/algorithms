@@ -20,7 +20,7 @@ public class EdgeWeightedGraph {
 
 	public EdgeWeightedGraph(int v) {
 		this.V = v;
-		adj = (Queue<Edge>[]) new Object[v];
+		adj = new LinkedList[v];
 		for (int i = 0; i < this.V; i++) {
 			adj[i] = new LinkedList<Edge>();
 		}

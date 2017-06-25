@@ -13,6 +13,30 @@ public class Edge implements Comparable<Edge> {
 	private int w;
 	private double weight;
 
+	public int getV() {
+		return v;
+	}
+
+	public void setV(int v) {
+		this.v = v;
+	}
+
+	public int getW() {
+		return w;
+	}
+
+	public void setW(int w) {
+		this.w = w;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
 	public int either() {
 		return this.v;
 	}
