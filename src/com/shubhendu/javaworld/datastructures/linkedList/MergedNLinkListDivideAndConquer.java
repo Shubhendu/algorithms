@@ -81,6 +81,11 @@ public class MergedNLinkListDivideAndConquer {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		StringBuilder sb = new StringBuilder();
+		sb.insert(0, " ").insert(0, "Hi");
+		sb.insert(0, "   ").insert(0, "world");
+		System.out.println(sb.toString());
 
 	}
 

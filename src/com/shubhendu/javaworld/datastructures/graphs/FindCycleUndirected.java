@@ -143,6 +143,10 @@ public class FindCycleUndirected {
 		int  x= (int) Math.ceil(Math.log(5) / Math.log(2));
 		System.out.println(2 * (int) Math.pow(2, x) - 1);
 		System.out.println((Math.log(3) / Math.log(2)));
+		
+		String s  = "shubhendu";
+		System.out.println(s.substring(0,0) + s.substring(1));
+		
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.shubhendu.javaworld.datastructures.tries;
 
+import java.util.Iterator;
+
 import com.shubhendu.javaworld.datastructures.queue.Queue;
 
 /**
@@ -65,7 +67,7 @@ public class TrieST<Value> {
 		if (node.value != null)
 			q.enqueue(prefix);
 		for (char c = 0; c < R; c++) {
-			collect(node.next[c], prefix + c, q);
+			collect(node.next[c], prefix + (char) (97 + c), q);
 		}
 	}
 
@@ -80,6 +82,10 @@ public class TrieST<Value> {
 		System.out.println(trie.get("shells"));
 		System.out.println(trie.get("boys"));
 		System.out.println(trie.get("she"));
+		Iterator<String> i = trie.iterator().iterator();
+		while(i.hasNext()){
+			System.out.println(i.next());
+		}
 
 	}
 

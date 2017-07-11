@@ -4,135 +4,93 @@
 package com.shubhendu.javaworld;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Set;
 
 /**
  * @author ssingh
  *
  */
 public class LFUCache {
-	private class MapNode {
-		DoublyLinkedNode dllNode;
-		int value;
-		int frequency;
-	}
-
-	private class FrequencyNode {
-		DoublyLinkedNode head;
-		DoublyLinkedNode tail;
-	}
-
-	private class DoublyLinkedNode {
-		DoublyLinkedNode prev;
-		DoublyLinkedNode next;
-		int key;
-
-		public DoublyLinkedNode(int k) {
-			this.key = k;
-		}
-	}
 
 	private int maxCapacity;
-	private Map<Integer, MapNode> cache;
-	private Map<Integer, FrequencyNode> frequencyMap;
-	private PriorityQueue<Integer> frequencyKeys;
+	private Map<Integer, Integer> valuesMap;
+	private Map<Integer, Integer> frequencyMap;
+	private Map<Integer, LinkedHashSet<Integer>> frequencyKeys;
+	int minFrequency;
 
 	public LFUCache(int capacity) {
 		maxCapacity = capacity;
-		cache = new HashMap<Integer, MapNode>();
-		frequencyMap = new HashMap<Integer, FrequencyNode>();
-		frequencyKeys = new PriorityQueue<Integer>();
+		valuesMap = new HashMap<Integer, Integer>();
+		frequencyMap = new HashMap<Integer, Integer>();
+		frequencyKeys = new HashMap<Integer, LinkedHashSet<Integer>>();
+		minFrequency = 0;
 	}
 
 	public int get(int key) {
-		if (!cache.containsKey(key)) {
+		if (!valuesMap.containsKey(key)) {
 			return -1;
 		}
-		MapNode node = cache.get(key);
-		int frequency = node.frequency;
-		incrementFrequency(frequency, node.dllNode);
-		node.frequency = frequency + 1;
-		return node.value;
+		int value = valuesMap.get(key);
+		incrementFrequency(key);
+		return value;
 	}
 
-	private void incrementFrequency(int key, DoublyLinkedNode node) {
-		FrequencyNode frequencyNode = frequencyMap.get(key);
-		if (frequencyNode != null) {
-			if (frequencyNode.head == node && frequencyNode.head == frequencyNode.tail) {
-				frequencyNode.head = null;
-				frequencyNode.tail = null;
-				frequencyMap.remove(key);
-				frequencyKeys.remove();
-			} else if (frequencyNode.head == node) {
-				DoublyLinkedNode nextNode = frequencyNode.head.next;
-				nextNode.prev = null;
-				frequencyNode.head.next = null;
-				frequencyNode.head = nextNode;
-			} else if (frequencyNode.tail == node) {
-				DoublyLinkedNode prevNode = frequencyNode.tail.prev;
-				prevNode.next = null;
-				frequencyNode.tail.prev = null;
-				frequencyNode.tail = prevNode;
-			} else if (node.next != null && node.prev != null) {
-				DoublyLinkedNode nextNode = node.next;
-				DoublyLinkedNode prevNode = node.prev;
-				prevNode.next = nextNode;
-				nextNode.prev = prevNode;
-			}
+	private void incrementFrequency(int key) {
+		int frequency = frequencyMap.get(key);
+		removeFromFrequencyKeys(frequency, key);
+		frequencyMap.put(key, frequency + 1);
+		if (!frequencyKeys.containsKey(frequency + 1)) {
+			frequencyKeys.put(frequency + 1, new LinkedHashSet<Integer>());
 		}
-		if (frequencyMap.containsKey(key + 1)) {
-			FrequencyNode nextFrequencyNode = frequencyMap.get(key + 1);
-			DoublyLinkedNode oldTail = nextFrequencyNode.tail;
-			oldTail.next = node;
-			node.prev = oldTail;
-			nextFrequencyNode.tail = node;
-		} else {
-			FrequencyNode newFrequencyNode = new FrequencyNode();
-			newFrequencyNode.head = node;
-			newFrequencyNode.tail = node;
-			frequencyMap.put(key + 1, newFrequencyNode);
-			frequencyKeys.add(key + 1);
+		frequencyKeys.get(frequency + 1).add(key);
+	}
+
+	private void removeFromFrequencyKeys(int frequency, int key) {
+		frequencyKeys.get(frequency).remove(key);
+		if (frequencyKeys.get(frequency).isEmpty()) {
+			frequencyKeys.remove(frequency);
+			if (frequency == minFrequency) {
+				minFrequency = frequency + 1;
+			}
 		}
 	}
 
 	public void put(int key, int value) {
-		if (cache.containsKey(key)) {
-			MapNode node = cache.get(key);
-			int frequency = node.frequency;
-			incrementFrequency(frequency, node.dllNode);
-			node.frequency = frequency + 1;
-			node.value = value;
-			cache.put(key, node);
+		if (maxCapacity <= 0) {
+			return;
+		}
+		if (valuesMap.containsKey(key)) {
+			valuesMap.put(key, value);
+			incrementFrequency(key);
 		} else {
-			if (cache.size() >= maxCapacity) {
-				evictLRUKey();
+			if (valuesMap.size() >= maxCapacity) {
+				evictLFUKey();
+				valuesMap.put(key, value);
+				setFrequency(key);
+			} else {
+				valuesMap.put(key, value);
+				setFrequency(key);
 			}
-			MapNode node = new MapNode();
-			node.value = value;
-			node.frequency = 1;
-			DoublyLinkedNode dll = new DoublyLinkedNode(key);
-			node.dllNode = dll;
-			incrementFrequency(0, node.dllNode);
-			cache.put(key, node);
+			incrementFrequency(key);
+			minFrequency = 1;
 		}
 	}
 
-	private void evictLRUKey() {
-		int lowestFrequency = frequencyKeys.peek();
-		FrequencyNode frequencyNode = frequencyMap.get(lowestFrequency);
-		DoublyLinkedNode head = frequencyNode.head;
-		int key = head.key;
-		cache.remove(key);
-		if (head.next == null) {
-			frequencyKeys.remove();
-			frequencyMap.remove(key);
-		} else {
-			head.next.prev = null;
-			head = head.next;
+	private void setFrequency(int key) {
+		frequencyMap.put(key, 0);
+		if (!frequencyKeys.containsKey(0)) {
+			frequencyKeys.put(0, new LinkedHashSet<Integer>());
 		}
+		frequencyKeys.get(0).add(key);
+
+	}
+
+	private void evictLFUKey() {
+		int keyToEvict = frequencyKeys.get(minFrequency).iterator().next();
+		frequencyKeys.get(minFrequency).remove(keyToEvict);
+		valuesMap.remove(keyToEvict);
+		frequencyMap.remove(keyToEvict);
 	}
 
 	/**
@@ -161,8 +119,6 @@ public class LFUCache {
 		System.out.println(cache.get(1));
 		System.out.println(cache.get(3));
 		System.out.println(cache.get(4));
-		Set<String> s = new HashSet<String>();
-		
 
 	}
 

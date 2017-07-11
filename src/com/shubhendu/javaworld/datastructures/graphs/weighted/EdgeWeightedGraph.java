@@ -10,6 +10,22 @@ import com.shubhendu.javaworld.datastructures.queue.Queue;
  *
  */
 public class EdgeWeightedGraph{
+	public int getV() {
+		return V;
+	}
+
+	public void setV(int v) {
+		V = v;
+	}
+
+	public Queue<Edge>[] getAdj() {
+		return adj;
+	}
+
+	public void setAdj(Queue<Edge>[] adj) {
+		this.adj = adj;
+	}
+
 	private int V;
 	private Queue<Edge>[] adj;
 	

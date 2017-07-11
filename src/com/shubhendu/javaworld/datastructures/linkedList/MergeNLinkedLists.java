@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.shubhendu.javaworld.datastructures;
+package com.shubhendu.javaworld.datastructures.linkedList;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;

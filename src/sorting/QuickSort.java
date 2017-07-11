@@ -123,6 +123,9 @@ public class QuickSort {
 		e = System.currentTimeMillis();
 		System.out.println("Time taken by 3way Quicksort: " + (e - s));
 		printArray(arr);
+		
+		int x = -10;
+		System.out.println(x & 0x7fffffff);
 	}
 
 }

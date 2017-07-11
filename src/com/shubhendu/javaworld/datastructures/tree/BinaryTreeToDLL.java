@@ -44,22 +44,22 @@ public class BinaryTreeToDLL {
 		}
 		if (root.left != null) {
 			root.left = convertToDLL(root.left);
-			TreeNode rightMostNode = root.left;
-			while (rightMostNode.right != null) {
-				rightMostNode = rightMostNode.right;
+			TreeNode rightMostNodeInLeftSubTree = root.left;
+			while (rightMostNodeInLeftSubTree.right != null) {
+				rightMostNodeInLeftSubTree = rightMostNodeInLeftSubTree.right;
 			}
-			rightMostNode.right = root;
-			root.left = rightMostNode;
+			rightMostNodeInLeftSubTree.right = root;
+			root.left = rightMostNodeInLeftSubTree;
 		}
 
 		if (root.right != null) {
 			root.right = convertToDLL(root.right);
-			TreeNode leftMostNode = root.right;
-			while (leftMostNode.left != null) {
-				leftMostNode = leftMostNode.left;
+			TreeNode leftMostNodeInRightSubTree = root.right;
+			while (leftMostNodeInRightSubTree.left != null) {
+				leftMostNodeInRightSubTree = leftMostNodeInRightSubTree.left;
 			}
-			leftMostNode.left = root;
-			root.right = leftMostNode;
+			leftMostNodeInRightSubTree.left = root;
+			root.right = leftMostNodeInRightSubTree;
 		}
 
 		return root;

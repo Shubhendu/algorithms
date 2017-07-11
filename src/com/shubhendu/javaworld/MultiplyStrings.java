@@ -4,6 +4,7 @@
 package com.shubhendu.javaworld;
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 /**
  * @author ssingh
@@ -11,55 +12,53 @@ import java.math.BigInteger;
  */
 public class MultiplyStrings {
 	public static String multiply2(String num1, String num2) {
+		if (num1 == null || num2 == null) {
+			return null;
+		}
+		char[] output = null;
 
-		
-		char[] totalProd = new char[num1.length() + num2.length()];
+		int n1Len = num1.length();
+		int n2Len = num2.length();
 
-		int n1Len = num1.length() - 1;
-		int n2Len = num2.length() - 1;
+		if (n1Len == 0 || n2Len == 0) {
+			int len = Math.max(n1Len, n2Len);
+			len = len > 0 ? len - 1 : 0;
+			output = new char[len];
+			Arrays.fill(output, '0');
+			return String.valueOf(output);
+		}
 
-		long rowProd = 0L;
-		long sum = 0L;
+		int totalLen = n1Len + n2Len;
+		output = new char[totalLen];
+		Arrays.fill(output, '0');
+
+		int prod = 0;
+		int count = 0;
 		int carryOver = 0;
+		boolean allZeroes = false;
 
-		for (int i = n1Len; i >= 0; i--) {
-			int d1 = num1.charAt(i) - '0';
+		for (int i = n1Len - 1; i >= 0; i--) {
+			count = --totalLen;
 			carryOver = 0;
-			for (int j = n2Len; j>= 0; j--) {
-				int d2 = num2.charAt(j) - '0';
-				
+			for (int j = n2Len - 1; j >= 0; j--) {
+				prod = ((num1.charAt(i) - '0') * (num2.charAt(j) - '0')) + carryOver;
+				allZeroes = prod == 0;
+				prod = prod + output[count] - '0';
+				output[count--] = (char) (prod % 10 + '0');
+				carryOver = (prod / 10);
+			}
+			if (carryOver > 0) {
+				output[count] = (char) ((output[count] - '0') + carryOver + '0');
 			}
 		}
-
-		return String.valueOf(totalProd);
-
-	}
-
-	public static String multiply(String num1, String num2) {
-
-		int sum = 0;
-		int firstNumLength = num1.length() - 1;
-		int secondNumLength = num2.length() - 1;
-		for (int i = firstNumLength; i >= 0; i--) {
-			int firstDigit = Integer.valueOf(String.valueOf(num1.charAt(i)));
-			String rowSum = null;
-			int leftOver = 0;
-			for (int j = secondNumLength; j >= 0; j--) {
-				int secondDigit = Integer.valueOf(String.valueOf(num2.charAt(j)));
-				int digitMultiple = (firstDigit * secondDigit) + leftOver;
-				leftOver = digitMultiple % 10;
-				Integer multipleVal = digitMultiple / 10;
-				// System.out.println(digitMultiple + " : "+ multipleVal);
-				if (rowSum != null) {
-					rowSum = multipleVal.toString() + rowSum;
-				} else {
-					rowSum = multipleVal.toString();
-				}
-				System.out.println(rowSum);
-			}
+		if (allZeroes) {
+			return new String("0");
 		}
-
-		return null;
+		if (output[0] == '0') {
+			return String.valueOf(output).substring(1);
+		} else {
+			return String.valueOf(output);
+		}
 	}
 
 	/**
@@ -67,12 +66,11 @@ public class MultiplyStrings {
 	 */
 	public static void main(String[] args) {
 		System.out.println(18 % 10);
-		MultiplyStrings.multiply2("12231241253025", "10314012120131231231");
+		MultiplyStrings.multiply2("99", "99");
 		BigInteger n1 = new BigInteger("10314012120131231231");
 		BigInteger n2 = new BigInteger("12231241253025");
 		System.out.println(n1.multiply(n2));
 		System.out.println(Long.MAX_VALUE);
-		
 
 	}
 
