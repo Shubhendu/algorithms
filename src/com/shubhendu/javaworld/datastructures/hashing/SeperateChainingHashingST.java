@@ -3,6 +3,8 @@
  */
 package com.shubhendu.javaworld.datastructures.hashing;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author ssingh
  *
@@ -45,5 +47,7 @@ public class SeperateChainingHashingST<Key, Value> {
 			}
 		}
 		st[i] = new Node(k, v, st[i]);
+		AtomicInteger a = new AtomicInteger(0);
+		a.getAndIncrement();
 	}
 }

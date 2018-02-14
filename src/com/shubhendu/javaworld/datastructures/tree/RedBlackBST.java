@@ -74,9 +74,11 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 		
 		if (isRed(node.right) == RED && !isRed(node.left))
 			node = rotateLeft(node);
-		else if(isRed(node.left) && isRed(node.left.left))
+		
+		if(isRed(node.left) && isRed(node.left.left))
 			node = rotateRight(node);
-		else if(isRed(node.left) && isRed(node.right))
+		
+		if(isRed(node.left) && isRed(node.right))
 			node = flipColors(node);
 	
 		return node;

@@ -15,12 +15,28 @@ public class CountOfPrimes {
 
 	List<Integer> primeNumbers = null;
 
+	public int countPrimes3(int n) {
+		boolean[] isNotPrime = new boolean[n];
+		int count = 0;
+		for (int i = 2; i < n; i++) {
+			if (isNotPrime[i]) {
+				continue;
+			}
+			count++;
+			for (int j = 2; j * i < n; j++) {
+				isNotPrime[i * j] = true;
+			}
+		}
+		return count;
+
+	}
+
 	public int countPrimes2(int n) {
 		boolean[] isPrime = new boolean[n];
 		Arrays.fill(isPrime, true);
 		isPrime[0] = false;
 		isPrime[1] = false;
-		
+
 		// Loop's ending condition is i * i < n instead of i < sqrt(n)
 		// to avoid repeatedly calling an expensive function sqrt().
 		for (int i = 2; i * i < n; i++) {
@@ -35,7 +51,7 @@ public class CountOfPrimes {
 			if (isPrime[i]) {
 				count++;
 			}
-				
+
 		}
 		return count;
 	}
@@ -92,7 +108,7 @@ public class CountOfPrimes {
 		long curr = System.currentTimeMillis();
 		System.out.println(c.countPrimes2(n));
 		System.out.println(System.currentTimeMillis() - curr);
-		
+
 		System.out.println((char) (97 + 1));
 	}
 

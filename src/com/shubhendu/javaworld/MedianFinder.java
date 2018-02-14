@@ -16,7 +16,8 @@ public class MedianFinder {
 
 	public MedianFinder() {
 		minHeap = new PriorityQueue<Integer>();
-		maxHeap = new PriorityQueue<Integer>(new DescendingComparator());
+//		maxHeap = new PriorityQueue<Integer>(new DescendingComparator());
+		maxHeap = new PriorityQueue<Integer>((Comparator<Integer>) (a, b) -> b - a);
 	}
 
 	private static class DescendingComparator implements Comparator<Integer> {

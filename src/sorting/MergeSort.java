@@ -50,8 +50,14 @@ public class MergeSort<T extends Comparable<T>> {
 
 	public static void main(String[] args) {
 		MergeSort<String> m = new MergeSort<String>();
-		String[] s = new String[] { "M","E","R","G","E","S","O","R","T" };
+		String[] s = new String[] { "M", "E", "R", "G", "E", "S", "O", "R", "T" };
 		m.sort(s);
 		m.printArr(s);
+
+		MergeSort<Integer> m1 = new MergeSort<Integer>();
+		Integer[] nums = new Integer[] { 7, 10, 12, 4, 5, 4, 6, 9 };
+		m1.sort(nums);
+		m1.printArr(nums);
+
 	}
 }

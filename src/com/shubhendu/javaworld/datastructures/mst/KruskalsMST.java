@@ -3,6 +3,7 @@
  */
 package com.shubhendu.javaworld.datastructures.mst;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -18,7 +19,7 @@ public class KruskalsMST {
 	private Queue<Edge> mst;
 
 	public KruskalsMST(EdgeWeightedGraph G) {
-		PriorityQueue<Edge> pq = new PriorityQueue<Edge>((a, b) -> (int) (a.getWeight() - b.getWeight()));
+		PriorityQueue<Edge> pq = new PriorityQueue<>((Comparator<Edge>)((a, b) -> (int) (a.getWeight() - b.getWeight())));
 		UnionFind uf = new UnionFind(G.numberOfVertices());
 		this.mst = new LinkedList<Edge>();
 

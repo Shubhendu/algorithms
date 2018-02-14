@@ -3,9 +3,8 @@
  */
 package com.shubhendu.javaworld;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
 
 /**
  * @author ssingh
@@ -24,7 +23,7 @@ public class MinWindowSubstring {
 				return "";
 		}
 
-		int start = 0, end = 0, minStart = 0, minLen = Integer.MAX_VALUE, counter = t.length();
+		int start = 0, end = 0, minStart = 0, minLen =  s.length() + 1, counter = t.length();
 		while (end < s.length()) {
 			char c1 = s.charAt(end);
 			if (map.get(c1) > 0)
@@ -48,7 +47,7 @@ public class MinWindowSubstring {
 				start++;
 			}
 		}
-		return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
+		return minLen >=  s.length()  ? "" : s.substring(minStart, minStart + minLen);
 	}
 
 	/**
@@ -56,9 +55,11 @@ public class MinWindowSubstring {
 	 */
 	public static void main(String[] args) {
 
-		String s = "ADOBECODEBANC";
+		String s = "EAEADOBECODEBANC";
 		String t = "ABC";
-		minWindow(s, t);
+		System.out.println(minWindow(s, t));
+		
+		LinkedList<String> l = new LinkedList();
 	}
 
 }
